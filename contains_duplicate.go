@@ -1,13 +1,23 @@
 package main
 
 func containsDuplicate(nums []int) bool {
-	nmap := make(map[int]int)
+	if len(nums) < 2 {
+		return false
+	}
 
-	for _, v := range nums {
-		nmap[v]++
+	sorted := false
 
-		if nmap[v] > 1 {
-			return true
+	for !sorted {
+		sorted = true
+		for i := 0; i < len(nums)-1; i++ {
+			if nums[i] == nums[i+1] {
+				return true
+			}
+
+			if nums[i] > nums[i+1] {
+				nums[i], nums[i+1] = nums[i+1], nums[i]
+				sorted = false
+			}
 		}
 	}
 
