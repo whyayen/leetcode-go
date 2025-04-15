@@ -7,28 +7,17 @@ func isAnagram(s string, t string) bool {
 		return false
 	}
 
-	sCharCount := map[string]int{}
+	smap := make(map[rune]int)
 
-	for i := 0; i < len(s); i++ {
-		sKey := string(s[i])
-		tKey := string(t[i])
-		_, sVIsExist := sCharCount[sKey]
-
-		if !sVIsExist {
-			sCharCount[sKey] = 1
-		} else {
-			sCharCount[sKey]++
-		}
-
-		_, tVIsExist := sCharCount[tKey]
-		if !tVIsExist {
-			sCharCount[tKey] = -1
-		} else {
-			sCharCount[tKey]--
-		}
+	for _, r := range s {
+		smap[r]++
 	}
 
-	for _, v := range sCharCount {
+	for _, r := range t {
+		smap[r]--
+	}
+
+	for _, v := range smap {
 		if v != 0 {
 			return false
 		}
