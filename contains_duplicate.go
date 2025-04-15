@@ -1,15 +1,13 @@
 package main
 
 func containsDuplicate(nums []int) bool {
-	h := map[int]int{}
+	nmap := make(map[int]int)
 
 	for _, v := range nums {
-		_, isExist := h[v]
+		nmap[v]++
 
-		if isExist {
+		if nmap[v] > 1 {
 			return true
-		} else {
-			h[v] = 1
 		}
 	}
 
